@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Pizzeria Ananas</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* GENERALE */
+/* Serve per far sì che le dimensioni degli elementi siano più facili da gestire */
+* {
+    box-sizing: border-box;
+} *
+
+body {
+    margin: 0; /* Toglie lo spazio bianco intorno alla pagina */
+    font-family: 'Poppins', sans-serif; /* Imposta il font */
+    background: linear-gradient(180deg, #f6f6f6, #ececec); /* Sfondo sfumato */
+    color: #222; /* Colore del testo */
+}
+
+section {
+    padding: 100px 8%; /* Spazio interno: sopra e sotto 100px, ai lati l'8% */
+}
+
+/* HEADER */
+header {
+    position: fixed; /* Rimane bloccato in alto */
+    top: 0;
+    width: 100%;
+    padding: 20px 8%;
+    display: flex; /* Mette gli elementi in riga */
+    justify-content: space-between; /* Spinge logo e menu ai lati */
+    align-items: center; /* Centra verticalmente */
+    background: rgba(255,255,255,0.85); /* sfondo trasparente */
+    backdrop-filter: blur(10px); /* Effetto sfocatura */
+    z-index: 1000;
+}
+
+header h1 {
+    font-weight: 700; /* Testo in grassetto */
+    font-size: 26px; /* Dimensione del titolo */
+}
+
+nav a { /* la parte che gestisce i link dentro il menù */
+    margin-left: 30px; 
+    text-decoration: none;
+    color: #222; /* Colore del testo */
+    font-weight: 400; /* Spessore normale */
+    position: relative;
+}
+
+nav a::after { /* gestisce effetti sul menù
+    content: ""; /* Crea una linea finta */
+    position: absolute; /* Posizionata sotto il link */
+    bottom: -5px;
+    left: 0;
+    width: 0; /* Parte invisibile */
+    height: 2px; /* Spessore linea */
+    background: #f2c94c; /* Colore linea */
+    transition: 0.3s; /* Animazione */
+}
+
+nav a:hover::after {
+    width: 100%; /* La linea si allunga quando passi sopra */
+}
+
+/* SEZIONE HERO */
+
+.hero {
+    height: 100vh; /* Occupa tutta l’altezza dello schermo */
+    background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)); /* Oscura lo sfondo */
+    background-size: cover;
+    background-position: center; /* Centra l’immagine */
+    color: white;
+    display: flex; /* Per centrare il contenuto */
+    align-items: center; /* Centra verticalmente */
+}
+
+.hero-content {
+    max-width: 650px; /* Limita la larghezza del testo */
+}
+
+.hero h2 {
+    font-size: 56px; /* Titolo grande */
+    line-height: 1.2; /* Spaziatura tra le righe */
+    margin-bottom: 20px; /* Spazio sotto */
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+.hero button {
+    padding: 18px 40px; /* Spazio interno del bottone */
+    font-size: 16px; /* Dimensione testo */
+    border: none;
+    border-radius: 50px; /* Bordi arrotondati */
+    background: #f2c94c; /* Colore bottone */
+    cursor: pointer; /* Cursore a mano */
+}
+
+/* SEZIONE INTRO */
+
+.intro {
+    background: white; /* Sfondo bianco */
+    border-radius: 30px; /* Angoli arrotondati */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08); /* Ombra leggera */
+}
+
+.intro h2 {
+    font-size: 36px; /* Titolo grande */
+    margin-bottom: 20px; /* Spazio sotto */
+}
+
+.intro p {
+    max-width: 900px; /* Limita larghezza testo */
+    line-height: 1.8; /* Spaziatura tra righe */
+}
+
+/* MENU */
+
+.menu-buttons {
+    text-align: center; /* Centra i pulsanti */
+    margin-bottom: 50px; /* Spazio sotto */
+}
+
+.menu-buttons button {
+    margin: 10px; /* Spazio tra i pulsanti */
+    padding: 12px 30px; /* Spazio interno */
+    border-radius: 30px; /* Bordi arrotondati */
+    border: 1px solid #222; /* Bordo nero */
+    background: none; /* Sfondo trasparente */
+    cursor: pointer; /* Cursore a mano */
+}
+
+.menu-buttons button:hover {
+    background: #222; /* Sfondo nero */
+    color: white; /* Testo bianco */
+}
+
+.menu-section {
+    display: none; /* Nasconde tutte le sezioni */
+}
+
+.menu-section.active {
+    display: grid; /* Mostra la sezione attiva come griglia */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Colonne automatiche */
+    gap: 40px; /* Spazio tra le card */
+}
+
+/* sezione prodotti */
+
+.card {
+    background: white; /* Sfondo bianco */
+    border-radius: 25px; /* Angoli arrotondati */
+    overflow: hidden; /* Taglia ciò che esce */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1); /* Ombra */
+    transition: 0.4s; /* Animazione */
+}
+
+.card:hover {
+    transform: translateY(-10px); /* ingrandisce al passaggio*/
+}
+
+.card img {
+    width: 100%; /* L’immagine occupa tutta la larghezza */
+    height: 200px; /* Altezza fissa */
+    object-fit: cover; /* Ritaglia senza deformare */
+}
+
+.card-content {
+    padding: 25px; /* Spazio interno */
+}
+
+.card-content h3 {
+    font-size: 20px; /* Titolo della riquadro */
+    margin-bottom: 10px; /* Spazio sotto */
+}
+
+.card-content p {
+    font-size: 14px;
+    line-height: 1.6; /* Spaziatura */
+}
+
+.price {
+    margin-top: 15px; /* Spazio sopra */
+    font-weight: 600; /* Testo in grassetto */
+    color: #1f7a5c; /* Verde */
+}
+
+/* SEZIONE CONTATTI */
+
+footer {
+    background: #1a1a1a; /* Sfondo scuro */
+    color: white; /* Testo bianco */
+    text-align: center; /* Testo centrato */
+    padding: 80px 8%; /* Spazio interno */
+}
+
+footer p {
+    margin: 10px 0; /* Spazio tra le righe */
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Pizzeria Ananas</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#menu">Menù</a>
+        <a href="#contatti">Contatti</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h2>Anche a Napoli, senza paura</h2>
+        <p>Nel cuore della tradizione, per portare innovazione.</p>
+        <button onclick="scrollToMenu()">Scopri il menù</button>
+    </div>
+</section>
+
+<section class="intro">
+    <h2>Chi siamo</h2>
+    <p>
+        Pizzeria Ananas nasce a Napoli, in una delle città più legate alla tradizione culinaria,
+        con l’obiettivo di rispettarla senza smettere di sperimentare. Crediamo nella qualità
+        delle materie prime, nella lentezza delle lievitazioni e nel coraggio delle scelte.
+        Anche quelle che fanno discutere.
+    </p>
+</section>
+
+<section id="menu">
+<h2>Il nostro menù</h2>
+
+<div class="menu-buttons">
+    <button onclick="showMenu('antipasti')">Antipasti</button>
+    <button onclick="showMenu('pizze')">Pizze</button>
+    <button onclick="showMenu('dolci')">Dolci</button>
+    <button onclick="showMenu('bevande')">Bevande</button>
+</div>
+
+<!-- ANTIPASTI -->
+<div id="antipasti" class="menu-section active">
+    <div class="card"><img src="antipasto1.png"><div class="card-content"><h3>Full Juventus</h3><p>piatto delizioso formato da 3 babba e condito a dovere (ringraziamento speciale allo chef L.Spalletti).</p><p class="price">9,00 €</p></div></div>
+    <div class="card"><img src="antipasto2.png"><div class="card-content"><h3>Crocchè artigianali</h3><p>Patate selezionate e frittura leggera.</p><p class="price">6,50 €</p></div></div>
+    <div class="card"><img src="antipasto3.png"><div class="card-content"><h3>Bruschette gourmet</h3><p>Pane, pomodoro e creatività.</p><p class="price">6,00 €</p></div></div>
+    <div class="card"><img src="antipasto4.png"><div class="card-content"><h3>Tagliere Ananas</h3><p>Selezione di salumi e formaggi.</p><p class="price">9,00 €</p></div></div>
+</div>
+
+<!-- PIZZE -->
+<div id="pizze" class="menu-section">
+    <div class="card"><img src="margherita.jpg"><div class="card-content"><h3>Margherita</h3><p>Il punto fermo della pizza napoletana.</p><p class="price">7,50 €</p></div></div>
+    <div class="card"><img src="4formaggi.jpg"><div class="card-content"><h3>4 Formaggi</h3><p>con prodotti di qualità a kilometro 0.</p><p class="price">10,00 €</p></div></div>
+    <div class="card"><img src="4stagioni.jpg"><div class="card-content"><h3>4 Stagioni</h3><p>Ogni fetta racconta una storia.</p><p class="price">9,50 €</p></div></div>
+    <div class="card"><img src="salata.jpeg"><div class="card-content"><h3>Bongustaio</h3><p>Per chi si sente affamato e stravagante.</p><p class="price">11,00 €</p></div></div>
+    <div class="card"><img src="ananas.jpg"><div class="card-content"><h3>Ananas</h3><p>Come noi non la fa nessuno.</p><p class="price">9,00 €</p></div></div>
+</div>
+
+<!-- DOLCI -->
+<div id="dolci" class="menu-section">
+    <div class="card"><img src="dolce1.jpg"><div class="card-content"><h3>Tiramisù</h3><p>Classico italiano.</p><p class="price">5,00 €</p></div></div>
+    <div class="card"><img src="dolce2.png"><div class="card-content"><h3>Cheesecake</h3><p>Cremosa e delicata.</p><p class="price">5,50 €</p></div></div>
+    <div class="card"><img src="dolce3.png"><div class="card-content"><h3>Babà moderno</h3><p>Tradizione rivisitata.</p><p class="price">4,50 €</p></div></div>
+    <div class="card"><img src="dolce4.png"><div class="card-content"><h3>Brownie</h3><p>Per un cioccolato intenso.</p><p class="price">5,00 €</p></div></div>
+    <div class="card"><img src="dolce5.png"><div class="card-content"><h3>Dessert all’ananas</h3><p>Coerenza fino in fondo.</p><p class="price">5,00 €</p></div></div>
+</div>
+
+<!-- BEVANDE -->
+<div id="bevande" class="menu-section">
+    <div class="card"><img src="bevanda2.png"><div class="card-content"><h3>Acqua</h3><p>Naturale o frizzante.</p><p class="price">2,00 €</p></div></div>
+    <div class="card"><img src="bevanda3.png"><div class="card-content"><h3>Coca-Cola</h3><p>Classico intramontabile.</p><p class="price">3,00 €</p></div></div>
+    <div class="card"><img src="bevanda1.jpg"><div class="card-content"><h3>Birra artigianale</h3><p>Produzione locale.</p><p class="price">4,00 €</p></div></div>
+    <div class="card"><img src="bevanda4.png"><div class="card-content"><h3>Bibita tropicale</h3><p>per aggiungere un senso di esotico.</p><p class="price">4,00 €</p></div></div>
+    <div class="card"><img src="bevanda5.png"><div class="card-content"><h3>Tè freddo</h3><p>Fresco e leggero (e all'ananas).</p><p class="price">3,00 €</p></div></div>
+</div>
+
+</section>
+
+<footer id="contatti">
+    <p>Indirizzo: Via dei Tribunali, Napoli</p>
+    <p>Telefono: +39 081 1234567</p>
+    <p>Email: info@pizzeriaananas.it</p>
+    <p>Nel dubbio, scegli l’ananas.</p>
+</footer>
+
+<script>
+function showMenu(id) { /* cartella usata per passare da un menù all'altro */
+    document.querySelectorAll('.menu-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+/* con la gestione tramite una lista, mostra solo la classe attiva*/	
+}
+
+function scrollToMenu() { //funzione usata per passare al menù tramite pulsanti
+    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
